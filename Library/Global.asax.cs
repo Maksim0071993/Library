@@ -25,12 +25,20 @@ namespace Library
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterType<BookRepository>().As<IBookRepository>();
             containerBuilder.RegisterType<AuthorRepository>().As<IAuthorRepository>();
+            containerBuilder.RegisterType<UserProfileRepository>().As<IUserProfileRepository>();
             containerBuilder.RegisterType<BookService>().As<IBookService>();
             containerBuilder.RegisterType<AuthorService>().As<IAuthorService>();
-            containerBuilder.RegisterType<LibraryEntities>().As<LibraryEntities>();
+            containerBuilder.RegisterType<LibraryEntity>().As<LibraryEntity>();
             containerBuilder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
+            containerBuilder.RegisterType<UserProfileService>().As<IUserProfileService>();
             containerBuilder.RegisterType(BuildManager.GetCompiledType("/AllBooks.aspx"));
             containerBuilder.RegisterType(BuildManager.GetCompiledType("/Search.aspx"));
+            containerBuilder.RegisterType(BuildManager.GetCompiledType("/AddBook.aspx"));
+            containerBuilder.RegisterType(BuildManager.GetCompiledType("/ResultSearch.aspx"));
+            containerBuilder.RegisterType(BuildManager.GetCompiledType("/Account/Register.aspx"));
+            containerBuilder.RegisterType(BuildManager.GetCompiledType("/BookAdditionConfirmation.aspx"));
+            
+
             var container = containerBuilder.Build();
             var autofacAdapter = new AutofacAdapter(container);
             HttpRuntime.WebObjectActivator = autofacAdapter;

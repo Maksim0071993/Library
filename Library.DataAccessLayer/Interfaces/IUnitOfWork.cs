@@ -11,5 +11,6 @@ namespace Library.DataAccessLayer.Interfaces
         IAuthorRepository Author { get; }
         void Save();
         IBookRepository Book { get; }
+        IUserProfileRepository UserProfile { get; }
     }
 }

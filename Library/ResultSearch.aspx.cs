@@ -16,14 +16,18 @@ namespace Library
         {
             BookService = bookService;
         }
-        protected string GetAllBooks()
+        protected string GetFilterBooks()
         {
             StringBuilder html = new StringBuilder();
-            var allBooks = BookService.GetAllBooks();
-            foreach (var book in allBooks)
+            var resultSearch = BookService.GetFilterBooks(Session["LastName"].ToString(), Session["BookName"].ToString());
+            if (resultSearch != null)
             {
-                html.Append(String.Format("<tr><td>{0} {1}</td><td>{2}</td>",
-                     book.Author.FirstName, book.Author.LastName, book.BookName));
+
+                foreach (var book in resultSearch)
+                {
+                    html.Append(String.Format("<tr><td>{0} {1}</td><td>{2}</td>",
+                         book.Author.FirstName, book.Author.LastName, book.BookName));
+                }
             }
             return html.ToString();
         }

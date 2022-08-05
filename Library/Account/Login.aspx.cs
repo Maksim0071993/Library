@@ -5,11 +5,17 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Owin;
 using Library.Models;
+using Library.BusinessLogicLayer.Interfaces;
 
 namespace Library.Account
 {
     public partial class Login : Page
     {
+        public IUserProfileService UserProfileService { get; set; }
+        public Login(IUserProfileService userProfileService)
+        {
+            UserProfileService = userProfileService;
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             RegisterHyperLink.NavigateUrl = "Register";
@@ -25,7 +31,9 @@ namespace Library.Account
 
         protected void LogIn(object sender, EventArgs e)
         {
-            if (IsValid)
+            var userProfile = UserProfileService.SearchUser(Email.Text, Password.Text);
+
+            if (userProfile != null)
             {
                 // Validate the user password
                 var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();

@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Search.aspx.cs" Inherits="Library.Search" %>
-<%@ Import Namespace="System.Web.Routing" %>
 
 <!DOCTYPE html>
 
@@ -28,7 +27,7 @@
         <div>  
                <asp:Button runat="server" OnClick="SearchBook" Text="Поиск" /> 
         </div>  
-                   
+                  
     </form>
 </body>
 </html>

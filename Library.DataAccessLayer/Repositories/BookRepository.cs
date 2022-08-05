@@ -9,8 +9,8 @@ namespace Library.DataAccessLayer.Repositories
 {
     public class BookRepository : IBookRepository
     {
-        private readonly LibraryEntities _applicationContext;
-        public BookRepository(LibraryEntities applicationContext)
+        private readonly LibraryEntity _applicationContext;
+        public BookRepository(LibraryEntity applicationContext)
         {
             _applicationContext = applicationContext;
         }

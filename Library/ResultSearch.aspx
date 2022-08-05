@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ResultSearch.aspx.cs" Inherits="Library.ResultSearch" Import ="Search.aspx.cs" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ResultSearch.aspx.cs" Inherits="Library.ResultSearch"%>
 
 <!DOCTYPE html>
 
@@ -19,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-
+            <%=GetFilterBooks() %>
         </tbody>
     </table>
         </div>

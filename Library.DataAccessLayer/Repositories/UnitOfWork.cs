@@ -9,22 +9,30 @@ namespace Library.DataAccessLayer.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly LibraryEntities _applicationContext = new LibraryEntities ();
+        private readonly LibraryEntity _applicationContext;
         private readonly IAuthorRepository _authorRepository;
         private readonly IBookRepository _bookRepository;
+        private readonly IUserProfileRepository _userProfileRepository;
         public UnitOfWork(
-            
+            LibraryEntity libraryContext,
             IAuthorRepository authorRepository,
-           IBookRepository bookRepository
+           IBookRepository bookRepository,
+           IUserProfileRepository userProfileRepository
             )
         {
-            _authorRepository = authorRepository;
-            _bookRepository = bookRepository;
+            _applicationContext = libraryContext;
+            _authorRepository = new AuthorRepository(_applicationContext);
+            _bookRepository = new BookRepository(_applicationContext);
+            _userProfileRepository = new UserProfileRepository(_applicationContext);
         }
 
         public IAuthorRepository Author
         {
             get { return _authorRepository; }
+        }
+        public IUserProfileRepository UserProfile
+        {
+            get { return _userProfileRepository; }
         }
 
         public IBookRepository Book

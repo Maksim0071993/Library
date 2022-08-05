@@ -44,15 +44,15 @@ namespace Library.BusinessLogicLayer.Services
         }
         public List<BookModel> GetFilterBooks(string lastName,string nameOfBook)
         {
-            var allBooks = _unitOfWork.Book.GetSomeBooks();
+            var allBooks = _unitOfWork.Book.GetSomeBooks().ToList();
 
-            if (nameOfBook != null)
+            if (nameOfBook != null && nameOfBook != string.Empty)
             {
-                allBooks = allBooks.Where(p => p.BookName.Contains(nameOfBook));
+                allBooks = allBooks.Where(p => p.BookName == nameOfBook).ToList();
             }
-            if (lastName != null)
+            if (lastName != null && lastName != string.Empty)
             {
-                 allBooks = allBooks.Where(p => p.Author.LastName.Contains(lastName) /*== lastName*/);
+                 allBooks = allBooks.Where(p => p.Author.LastName == lastName).ToList();
             }
             var result = allBooks.Select(x => _mapper.Map<BookModel>(x)).ToList();
             return result;

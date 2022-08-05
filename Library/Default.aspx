@@ -20,7 +20,7 @@
                 Если у вас есть книга, которой вы готовы поделиться с другими, вы можете добавить ее в наш список книг
             </p>
             <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301949">Добавить &raquo;</a>
+                <a class="btn btn-default" runat="server" href="~/AddBook">Добавить &raquo;</a>
             </p>
         </div>
         <div class="col-md-4">

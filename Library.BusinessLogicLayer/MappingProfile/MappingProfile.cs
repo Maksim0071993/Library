@@ -15,6 +15,7 @@ namespace Library.BusinessLogicLayer.MappingProfile
         {
             CreateMap<BookModel, Book>().ReverseMap();
             CreateMap<AuthorModel, Author>().ReverseMap();
+            CreateMap<UserProfileModel, UserProfile>().ReverseMap();
         }
     }
 }

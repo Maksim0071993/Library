@@ -13,10 +13,10 @@ namespace Library.DataAccessLayer
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class LibraryEntities : DbContext
+    public partial class LibraryEntity : DbContext
     {
-        public LibraryEntities()
-            : base("name=LibraryEntities")
+        public LibraryEntity()
+            : base("name=LibraryEntity")
         {
         }
     
@@ -27,5 +27,6 @@ namespace Library.DataAccessLayer
     
         public virtual DbSet<Author> Author { get; set; }
         public virtual DbSet<Book> Book { get; set; }
+        public virtual DbSet<UserProfile> UserProfile { get; set; }
     }
 }

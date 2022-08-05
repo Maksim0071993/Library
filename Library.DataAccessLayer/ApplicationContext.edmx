@@ -13,19 +13,23 @@
           <Property Name="FirstName" Type="varchar(max)" Nullable="false" />
           <Property Name="LastName" Type="varchar(max)" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Library.dbo.Book' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Book">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="BookName" />
-            <PropertyRef Name="AuthorId" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BookName" Type="varchar(max)" Nullable="false" />
           <Property Name="AuthorId" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Book__AuthorId__29572725">
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserPassword" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Book__AuthorId__4BAC3F29">
           <End Role="Author" Type="Self.Author" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -41,14 +45,9 @@ warning 6002: The table/view 'Library.dbo.Book' does not have a primary key defi
         </Association>
         <EntityContainer Name="LibraryModelStoreContainer">
           <EntitySet Name="Author" EntityType="Self.Author" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Book" EntityType="Self.Book" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Book].[Id] AS [Id], 
-    [Book].[BookName] AS [BookName], 
-    [Book].[AuthorId] AS [AuthorId]
-    FROM [dbo].[Book] AS [Book]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK__Book__AuthorId__29572725" Association="Self.FK__Book__AuthorId__29572725">
+          <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Book__AuthorId__4BAC3F29" Association="Self.FK__Book__AuthorId__4BAC3F29">
             <End Role="Author" EntitySet="Author" />
             <End Role="Book" EntitySet="Book" />
           </AssociationSet>
@@ -65,20 +64,26 @@ warning 6002: The table/view 'Library.dbo.Book' does not have a primary key defi
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Book" Relationship="Self.FK__Book__AuthorId__29572725" FromRole="Author" ToRole="Book" />
+          <NavigationProperty Name="Book" Relationship="Self.FK__Book__AuthorId__4BAC3F29" FromRole="Author" ToRole="Book" />
         </EntityType>
         <EntityType Name="Book">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="BookName" />
-            <PropertyRef Name="AuthorId" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BookName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="AuthorId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Author" Relationship="Self.FK__Book__AuthorId__29572725" FromRole="Book" ToRole="Author" />
+          <NavigationProperty Name="Author" Relationship="Self.FK__Book__AuthorId__4BAC3F29" FromRole="Book" ToRole="Author" />
         </EntityType>
-        <Association Name="FK__Book__AuthorId__29572725">
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Book__AuthorId__4BAC3F29">
           <End Role="Author" Type="Self.Author" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -92,10 +97,11 @@ warning 6002: The table/view 'Library.dbo.Book' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="LibraryEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="LibraryEntity" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Author" EntityType="Self.Author" />
           <EntitySet Name="Book" EntityType="Self.Book" />
-          <AssociationSet Name="FK__Book__AuthorId__29572725" Association="Self.FK__Book__AuthorId__29572725">
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" />
+          <AssociationSet Name="FK__Book__AuthorId__4BAC3F29" Association="Self.FK__Book__AuthorId__4BAC3F29">
             <End Role="Author" EntitySet="Author" />
             <End Role="Book" EntitySet="Book" />
           </AssociationSet>
@@ -105,7 +111,7 @@ warning 6002: The table/view 'Library.dbo.Book' does not have a primary key defi
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="LibraryModelStoreContainer" CdmEntityContainer="LibraryEntities">
+        <EntityContainerMapping StorageEntityContainer="LibraryModelStoreContainer" CdmEntityContainer="LibraryEntity">
           <EntitySetMapping Name="Author">
             <EntityTypeMapping TypeName="LibraryModel.Author">
               <MappingFragment StoreEntitySet="Author">
@@ -121,6 +127,15 @@ warning 6002: The table/view 'Library.dbo.Book' does not have a primary key defi
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="BookName" ColumnName="BookName" />
                 <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfile">
+            <EntityTypeMapping TypeName="LibraryModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
