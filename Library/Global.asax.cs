@@ -35,6 +35,7 @@ namespace Library
             containerBuilder.RegisterType(BuildManager.GetCompiledType("/Search.aspx"));
             containerBuilder.RegisterType(BuildManager.GetCompiledType("/AddBook.aspx"));
             containerBuilder.RegisterType(BuildManager.GetCompiledType("/ResultSearch.aspx"));
+            containerBuilder.RegisterType(BuildManager.GetCompiledType("/AddAuthor.aspx"));
             containerBuilder.RegisterType(BuildManager.GetCompiledType("/Account/Register.aspx"));
             containerBuilder.RegisterType(BuildManager.GetCompiledType("/BookAdditionConfirmation.aspx"));
             

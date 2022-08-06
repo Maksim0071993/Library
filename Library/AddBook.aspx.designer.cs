@@ -15,42 +15,6 @@ namespace Library
     {
 
         /// <summary>
-        /// AuthorFirstName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label AuthorFirstName;
-
-        /// <summary>
-        /// FirstName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox FirstName;
-
-        /// <summary>
-        /// AuthorLastName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label AuthorLastName;
-
-        /// <summary>
-        /// LastName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox LastName;
-
-        /// <summary>
         /// NameOfBook control.
         /// </summary>
         /// <remarks>
@@ -60,12 +24,12 @@ namespace Library
         protected global::System.Web.UI.WebControls.Label NameOfBook;
 
         /// <summary>
-        /// BookName control.
+        /// AddedBookName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox BookName;
+        protected global::System.Web.UI.WebControls.TextBox AddedBookName;
     }
 }

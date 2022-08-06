@@ -12,5 +12,6 @@ namespace Library.BusinessLogicLayer.Interfaces
         int AddAuthor(AuthorModel author);
         List<AuthorModel> GetAllAuthors();
         AuthorModel GetAuthorById(int id);
+        int IsThereAnAuthor(string firstName, string lastName);
     }
 }

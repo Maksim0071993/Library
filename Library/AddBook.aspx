@@ -7,28 +7,18 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-            <div>  
-              <asp:Label runat="server" ID="AuthorFirstName">Имя автора</asp:Label>  
-             </div>
-         <div>  
-              <asp:TextBox runat="server" ID="FirstName" /> 
-         </div> 
-           <div>  
-              <asp:Label runat="server" ID="AuthorLastName">Фамилия автора</asp:Label>  
-             </div>
-         <div>  
-              <asp:TextBox runat="server" ID="LastName" /> 
-         </div> 
-        </div>
-        </div> 
+            </div>
            <div>  
               <asp:Label runat="server" ID="NameOfBook">Название книги</asp:Label>  
              </div>
+        
          <div>  
-              <asp:TextBox runat="server" ID="BookName" /> 
+              <asp:TextBox runat="server" ID="AddedBookName" required="required" ErrorMessage="Поле должно быть заполнено"/> 
          </div> 
+        </div>
     <div>  
                <asp:Button runat="server" OnClick="AddNewBook" Text="Добавить" /> 
         </div>  
+        
 
 </asp:Content>

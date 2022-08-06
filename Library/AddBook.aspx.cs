@@ -14,27 +14,21 @@ namespace Library
     public partial class AddBook : System.Web.UI.Page
     {
         public IBookService BookService { get; set; }
-        public IAuthorService AuthorService {get;set;}
         private readonly IMapper _mapper;
 
-        public AddBook(IBookService bookService, IAuthorService authorService)
+        public AddBook(IBookService bookService)
         {
             BookService = bookService;
-            AuthorService = authorService;
             var configuration = new MapperConfiguration(cfg => cfg.AddProfile<MappingProfile.MappingProfile>());
             _mapper = new Mapper(configuration);
         }
         protected void AddNewBook(object sender, EventArgs e)
         {
             BookViewModel model = new BookViewModel();
-            model.BookName = BookName.Text;
-            AuthorViewModel authorModel = new AuthorViewModel();
-            authorModel.FirstName = FirstName.Text;
-            authorModel.LastName = LastName.Text;
-            if(IsPostBack)
-            {
-                var newAuthor = AuthorService.AddAuthor(_mapper.Map<AuthorModel>(authorModel));
-                model.AuthorId = newAuthor;
+            model.AuthorId = int.Parse(Session["AuthorId"].ToString());
+            model.BookName = AddedBookName.Text;
+            if (IsPostBack)
+            { 
                 BookService.AddBook(_mapper.Map<BookModel>(model));
                 Response.Redirect("BookAdditionConfirmation");
             }

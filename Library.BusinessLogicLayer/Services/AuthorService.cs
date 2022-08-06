@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Library.BusinessLogicLayer.Interfaces;
 using Library.BusinessLogicLayer.Models;
+using Library.DataAccessLayer;
 using Library.DataAccessLayer.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,18 @@ namespace Library.BusinessLogicLayer.Services
                 return _mapper.Map<AuthorModel>(author);
             else
                 return null;
+        }
+        public int IsThereAnAuthor(string firstName, string lastName)
+        {
+            var result = _unitOfWork.Author.Get(x => x.FirstName == firstName && x.LastName == lastName ).FirstOrDefault();
+            if(result != null)
+            {
+                return result.Id;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }
