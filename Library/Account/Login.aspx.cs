@@ -31,10 +31,6 @@ namespace Library.Account
 
         protected void LogIn(object sender, EventArgs e)
         {
-            var userProfile = UserProfileService.SearchUser(Email.Text, Password.Text);
-
-            if (userProfile != null)
-            {
                 // Validate the user password
                 var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 var signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
@@ -66,4 +62,3 @@ namespace Library.Account
             }
         }
     }
-}
